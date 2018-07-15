@@ -1,0 +1,54 @@
+{
+  "name": "mws-restaurant-stage-2-production",
+  "version": "1.0.0",
+  "description": "New production environment for restaurant review application",
+  "main": "index.js",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.51",
+    "compression": "^1.7.2",
+    "express": "^4.16.3",
+    "idb": "^2.1.2",
+    "nodemon": "^1.17.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-html-import-to-string": "0.0.1",
+    "babelify": "^9.0.0",
+    "browserify": "^16.2.2",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean-css": "^3.9.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.3",
+    "gulp-replace": "^1.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "rollup-plugin-babel": "^4.0.0-beta.5",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "scripts": {
+    "start:dev": "node ./build/server.js",
+    "build": "gulp",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/booellean/mws-restaurant-production.git"
+  },
+  "keywords": [
+    "production",
+    "tutorial",
+    "assignment",
+    "learning"
+  ],
+  "author": "Elle Pope a.k.a booellean",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/booellean/mws-restaurant-production/issues"
+  },
+  "homepage": "http://www.polyentertainment.com"
+}
