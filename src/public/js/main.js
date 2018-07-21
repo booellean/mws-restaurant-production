@@ -9,9 +9,9 @@ var markers = []
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added
-  // fetchNeighborhoods();
-  // fetchCuisines();
-  DBHelper.fetchRestaurants();
+  //pass functions as parameters to create new promises
+  DBHelper.fetchRestaurants(DBHelper.fetchNeighborhoods);
+  DBHelper.fetchRestaurants(DBHelper.fetchCuisines);
 });
 
 /**
@@ -21,12 +21,12 @@ fetchNeighborhoods = (error, neighborhoods) => {
     if (error) { // Got an error
       console.error(error);
     } else {
-      console.log(neighborhoods);
       self.neighborhoods = neighborhoods;
       fillNeighborhoodsHTML();
     }
   };
 
+//Original function
 // fetchNeighborhoods = () => {
 //   DBHelper.fetchNeighborhoods((error, neighborhoods) => {
 //     if (error) { // Got an error
@@ -54,16 +54,26 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
 /**
  * Fetch all cuisines and set their HTML.
  */
-fetchCuisines = () => {
-  DBHelper.fetchCuisines((error, cuisines) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.cuisines = cuisines;
-      fillCuisinesHTML();
-    }
-  });
+fetchCuisines = (error, cuisines) => {
+  if (error) { // Got an error!
+    console.error(error);
+  } else {
+    self.cuisines = cuisines;
+    fillCuisinesHTML();
+  }
 }
+
+//Original function
+// fetchCuisines = () => {
+//   DBHelper.fetchCuisines((error, cuisines) => {
+//     if (error) { // Got an error!
+//       console.error(error);
+//     } else {
+//       self.cuisines = cuisines;
+//       fillCuisinesHTML();
+//     }
+//   });
+// }
 
 /**
  * Set cuisines HTML.
@@ -114,15 +124,38 @@ updateRestaurants = () => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
-  DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      resetRestaurants(restaurants);
-      fillRestaurantsHTML();
-    }
-  })
+  DBHelper.fetchRestaurants(DBHelper.fetchRestaurantByCuisineAndNeighborhood, cuisine, neighborhood);
 }
+
+fillUpdatedRestaurants = (error, restaurants) => {
+  if (error) { // Got an error!
+    console.error(error);
+  } else {
+    resetRestaurants(restaurants);
+    fillRestaurantsHTML();
+  }
+}
+
+//Original Function
+// updateRestaurants = () => {
+//   const cSelect = document.getElementById('cuisines-select');
+//   const nSelect = document.getElementById('neighborhoods-select');
+
+//   const cIndex = cSelect.selectedIndex;
+//   const nIndex = nSelect.selectedIndex;
+
+//   const cuisine = cSelect[cIndex].value;
+//   const neighborhood = nSelect[nIndex].value;
+
+//   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
+//     if (error) { // Got an error!
+//       console.error(error);
+//     } else {
+//       resetRestaurants(restaurants);
+//       fillRestaurantsHTML();
+//     }
+//   })
+// }
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.

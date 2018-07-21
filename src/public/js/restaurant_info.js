@@ -59,17 +59,43 @@ fetchRestaurantFromURL = (callback) => {
     error = 'No restaurant id in URL'
     callback(error, null);
   } else {
-    DBHelper.fetchRestaurantById(id, (error, restaurant) => {
-      self.restaurant = restaurant;
-      if (!restaurant) {
-        console.error(error);
-        return;
-      }
-      fillRestaurantHTML();
-      callback(null, restaurant)
-    });
+    //TODO: More efficient and eloquent solution to passing parameters?)
+    DBHelper.fetchRestaurants(DBHelper.fetchRestaurantById, undefined, undefined, id);
   }
 }
+
+fillFetchedRestaurantFromURL = (error, restaurant) => {
+  self.restaurant = restaurant;
+  if (!restaurant) {
+    console.error(error);
+    return;
+  }
+  fillRestaurantHTML();
+  return (null, restaurant)
+}
+
+//Original Function
+// fetchRestaurantFromURL = (callback) => {
+//   if (self.restaurant) { // restaurant already fetched!
+//     callback(null, self.restaurant)
+//     return;
+//   }
+//   const id = getParameterByName('id');
+//   if (!id) { // no id found in URL
+//     error = 'No restaurant id in URL'
+//     callback(error, null);
+//   } else {
+//     DBHelper.fetchRestaurants(id, (error, restaurant) => {
+//       self.restaurant = restaurant;
+//       if (!restaurant) {
+//         console.error(error);
+//         return;
+//       }
+//       fillRestaurantHTML();
+//       callback(null, restaurant)
+//     });
+//   }
+// }
 
 /**
  * Create restaurant HTML and add it to the webpage
