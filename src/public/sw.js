@@ -37,8 +37,7 @@ self.addEventListener('install', (event) =>{
         'js/dbhelper.js',
         'js/restaurant_info.js',
         'js/service_worker.js',
-        'css/styles.css',
-        'data/restaurants.json'
+        'css/styles.css'
       ]);
     })
   );
