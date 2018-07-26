@@ -1,6 +1,15 @@
 /**
  * Common database helper functions.
  */
+/**
+* @description Create an indexedDB object and upgrade if necessary
+* @returns {object} keypath of "id"
+*/
+
+const dbPromise = idb.open('restaurant-data', 1, upgradeDB => {
+  upgradeDB.createObjectStore('restaurants', { keyPath: 'id' });
+});
+
 class DBHelper {
 
   /**
