@@ -2,15 +2,6 @@ const staticCacheName= 'restaurant-review-';
 const staticCacheVer = 'v1';
 const staticCache = staticCacheName + staticCacheVer; //full version name
 
-/**
-* @description Create an indexedDB object and upgrade if necessary
-* @returns {object} keypath of "id"
-*/
-
-const dbPromise = idb.open('restaurant-data', 1, upgradeDB => {
-  upgradeDB.createObjectStore('restaurants', { keyPath: 'id' });
-});
-
 //caching code was partly derived from Google Developers, information below
 /**
 *Author: Google (Individual Names Not Listed)
@@ -37,7 +28,7 @@ self.addEventListener('install', (event) =>{
         'js/dbhelper.js',
         'js/restaurant_info.js',
         'js/service_worker.js',
-        'css/styles.css'
+        'scss/styles.css'
       ]);
     })
   );
