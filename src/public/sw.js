@@ -2,6 +2,15 @@ const staticCacheName= 'restaurant-review-';
 const staticCacheVer = 'v1';
 const staticCache = staticCacheName + staticCacheVer; //full version name
 
+/**
+* @description Create an indexedDB object and upgrade if necessary
+* @returns {object} keypath of "id"
+*/
+
+const dbPromise = idb.open('restaurant-data', 1, upgradeDB => {
+  upgradeDB.createObjectStore('restaurants', { keyPath: 'id' });
+});
+
 //caching code was partly derived from Google Developers, information below
 /**
 *Author: Google (Individual Names Not Listed)
@@ -9,7 +18,7 @@ const staticCache = staticCacheName + staticCacheVer; //full version name
 *Title: Caching Files with Service Worker
 *Code Version: Unknown
 *Type: Service Worker
-*Web Addres: https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker
+*Web Address: https://developers.google.com/web/ilt/pwa/caching-'files-with-service-worker
 */
 
 /**
