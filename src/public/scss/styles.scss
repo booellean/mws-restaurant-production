@@ -70,7 +70,6 @@ header {
   width: 100vw;
   z-index: 1000;
   bottom: 0;
-  position: absolute;
   a{
     width: 100%;
   }
@@ -128,7 +127,6 @@ header {
   position: fixed;
   display: block;
   right: 0;
-  top: 5rem;
   width: 50%;
   height: calc(100% - 5rem);
   background: blue none repeat scroll 0 0;
