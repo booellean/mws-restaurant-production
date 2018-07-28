@@ -60,7 +60,7 @@ fetchRestaurantFromURL = (callback) => {
     callback(error, null);
   } else {
     //TODO: More efficient and eloquent solution to passing parameters?)
-    DBHelper.fetchRestaurants(DBHelper.fetchRestaurantById, undefined, undefined, id);
+  DBHelper.fetchRestaurantById(id);
   }
 }
 

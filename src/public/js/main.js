@@ -9,9 +9,8 @@ var markers = []
  */
 document.addEventListener('DOMContentLoaded', (event) => {
   initMap(); // added
-  //pass functions as parameters to create new promises
-  DBHelper.fetchRestaurants(DBHelper.fetchNeighborhoods);
-  DBHelper.fetchRestaurants(DBHelper.fetchCuisines);
+  DBHelper.fetchNeighborhoods();
+  DBHelper.fetchCuisines();
 });
 
 /**
@@ -114,6 +113,7 @@ initMap = () => {
 /**
  * Update page and map for current restaurants.
  */
+
 updateRestaurants = () => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
@@ -124,7 +124,7 @@ updateRestaurants = () => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
-  DBHelper.fetchRestaurants(DBHelper.fetchRestaurantByCuisineAndNeighborhood, cuisine, neighborhood);
+  DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood);
 }
 
 fillUpdatedRestaurants = (error, restaurants) => {
@@ -134,7 +134,29 @@ fillUpdatedRestaurants = (error, restaurants) => {
     resetRestaurants(restaurants);
     fillRestaurantsHTML();
   }
-}
+};
+
+// updateRestaurants = () => {
+//   const cSelect = document.getElementById('cuisines-select');
+//   const nSelect = document.getElementById('neighborhoods-select');
+
+//   const cIndex = cSelect.selectedIndex;
+//   const nIndex = nSelect.selectedIndex;
+
+//   const cuisine = cSelect[cIndex].value;
+//   const neighborhood = nSelect[nIndex].value;
+
+//   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood);
+// }
+
+// fillUpdatedRestaurants = (error, restaurants) => {
+//   if (error) { // Got an error!
+//     console.error(error);
+//   } else {
+//     resetRestaurants(restaurants);
+//     fillRestaurantsHTML();
+//   }
+// }
 
 //Original Function
 // updateRestaurants = () => {
