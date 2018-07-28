@@ -6,8 +6,12 @@
 * @returns {object} keypath of "id"
 */
 
-const dbPromise = idb.open('restaurant-data', 1, upgradeDB => {
-  upgradeDB.createObjectStore('restaurants', { keyPath: 'id' });
+let restaurantBackup; //backup if indexedDB is not supported
+const idbName = 'restaurant-data';
+
+const dbPromise = idb.open(idbName, 1, upgradeDB => {
+  upgradeDB.createObjectStore('restaurant', { keyPath: 'id' });
+  DBHelper.fetchRestaurants();
 });
 
 class DBHelper {
@@ -26,15 +30,41 @@ class DBHelper {
   /**
    * Fetch all restaurants.
    */
-  static fetchRestaurants(method, cuisine, neighborhood, id) {
+  // static fetchRestaurants(method, cuisine, neighborhood, id) {
+  static fetchRestaurants() {
     fetch(DBHelper.DATABASE_URL)
     .then( response => {
       const restaurants = response.json();
       return restaurants;
     })
     .then( restaurants => {
-      method(null, restaurants, cuisine, neighborhood, id);
+      if(!window.indexedDB){
+        restaurantBackup = restaurants;
+        return;
+      }
+      dbPromise.then( db => {
+        const tx = db.transaction('restaurant', 'readwrite');
+        const keyValStore = tx.objectStore('restaurant');
+        restaurants.forEach( restaurant => {
+          keyValStore.put({
+            id: restaurant.id,
+            name: restaurant.name,
+            neighborhood: restaurant.neighborhood,
+            photograph: restaurant.photograph,
+            ext: restaurant.ext,
+            alt: restaurant.alt,
+            address: restaurant.address,
+            latlng: restaurant.latlng,
+            cuisine_type: restaurant.cuisine_type,
+            operating_hours: restaurant.operating_hours,
+            reviews: restaurant.reviews
+          });
+        });
+      })
     })
+    // .then( restaurants => {
+    //   method(null, restaurants, cuisine, neighborhood, id);
+    // })
     .catch( error => {
       console.log(error);
       return (error, null);
