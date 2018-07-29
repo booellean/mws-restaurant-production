@@ -28,7 +28,8 @@ self.addEventListener('install', (event) =>{
         'js/dbhelper.js',
         'js/restaurant_info.js',
         'js/service_worker.js',
-        'scss/styles.css'
+        'js/idb.js',
+        'css/styles.css'
       ]);
     })
   );
