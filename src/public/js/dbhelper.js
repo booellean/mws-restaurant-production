@@ -12,8 +12,13 @@ const idbTx = 'restaurant';
 
 const dbPromise = idb.open(idbName, 1, upgradeDB => {
   upgradeDB.createObjectStore('restaurant', { keyPath: 'id' });
-  DBHelper.fetchRestaurants();
 });
+
+window.addEventListener('load', initiateDatabase);
+
+function initiateDatabase() {
+  DBHelper.fetchRestaurants();
+}
 
 class DBHelper {
 
@@ -62,6 +67,9 @@ class DBHelper {
           });
         });
       })
+    })
+    .then( () => {
+      return initPage();
     })
     // .then( restaurants => {
     //   method(null, restaurants, cuisine, neighborhood, id);
@@ -269,6 +277,7 @@ class DBHelper {
         const restaurants = keyValStore.getAll();
 
         return restaurants;
+
       })
       .then( restaurants => {
         // Get all cuisines from all restaurants
