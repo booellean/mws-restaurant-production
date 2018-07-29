@@ -1,11 +1,11 @@
 {
-  "_comment": "I may use this if I decide to create an app shortcut button.",
+  "_comment": "Originally from https://github.com/seetd/mws-restaurant-stage-1.git, user seetd. Modified slightly.",
   "name": "Restaurant Reviews",
   "short_name": "Restaurants",
   "background_color": "#FFF",
-  "theme_color": "#B26000",
+  "theme_color": "#252831",
   "icons": [{
-    "src": "/imgs/logo.svg",
+    "src": "/img/logo.svg",
     "sizes": "72x72 96x96 128x128 192x192 256x256 512x512",
     "type": "image/svg"
   }],
