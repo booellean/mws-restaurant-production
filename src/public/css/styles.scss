@@ -1,85 +1,5 @@
 /* CSS Document */
 /*These styles for html and body will prevent overflow issues in mobile*/
-html{
-  overflow: hidden;
-}
-
-html,
-body{
-  width: 100vw;
-  max-width: 100%;
-  box-sizing: border-box;
-  height: 100%;
-  overflow-y: visible;
-}
-body,td,th,p{
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
-	color: #333;
-	line-height: 1.5;
-}
-body {
-  overflow-x: hidden;
-	background-color: #fdfdfd;
-	margin: 0;
-  position:relative;
-  display: flex;
-  flex-flow: column nowrap;
-}
-ul {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10pt;
-  color: #333;
-  li {
-    font-family: Arial, Helvetica, sans-serif;
-  	font-size: 10pt;
-    color: #333;
-  }
-}
-a {
-	color: orange;
-  text-decoration: none;
-  img {
-    border: none 0px #fff;
-  }
-}
-a:hover, a:focus {
-	color: #3397db;
-	text-decoration: none;
-}
-h1, h2, h3, h4, h5, h6 {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0 0 20px;
-}
-article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10000;
-}
-#maincontent {
-  background-color: #f3f3f3;
-  padding-top: 5rem;
-  width: 100vw;
-}
-#footer {
-  background-color: #444;
-  color: #aaa;
-  font-size: 8pt;
-  letter-spacing: 1px;
-  padding: 25px;
-  text-align: center;
-  text-transform: uppercase;
-  width: 100vw;
-  z-index: 1000;
-  bottom: 0;
-  a{
-    width: 100%;
-  }
-}
 /* ====================== Navigation ====================== */
 #site-nav {
   width: 100%;
@@ -120,13 +40,12 @@ header {
       color: #01447e;
       text-decoration: underline;
     }
-    li+li:before {
-      /* Add a slash symbol (/) before/behind each list item */
-      padding: 8px;
-      color: black;
-      content: "/\00a0";
-    }
   }
+}
+#breadcrumb ul li+li:before {
+  padding: 8px;
+  color: black;
+  content: "/\00a0";
 }
 /* ====================== Map ====================== */
 #map-container{
