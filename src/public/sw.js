@@ -29,7 +29,12 @@ self.addEventListener('install', (event) =>{
         'js/restaurant_info.js',
         'js/service_worker.js',
         'js/idb.js',
-        'css/styles.css'
+        'css/styles.css',
+        'css/styles-798.css',
+        'css/styles-615.css',
+        'css/styles-541.css',
+        'css/styles-498.css',
+        'css/styles-323.css'
       ]);
     })
   );
