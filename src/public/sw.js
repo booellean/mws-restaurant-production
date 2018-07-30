@@ -30,7 +30,9 @@ self.addEventListener('install', (event) =>{
         '/js/service_worker.js',
         '/js/idb.js',
         '/css/styles.css',
-        '/css/styles-queries.css'
+        '/css/styles-queries.css',
+        '/css/normalize.min.css',
+        'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css'
       ]);
     })
   );
