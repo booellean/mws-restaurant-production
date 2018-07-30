@@ -224,6 +224,7 @@ createRestaurantHTML = (restaurant) => {
   const newId = (restaurant.name).replace(/[^A-Za-z0-9]/g, '');
   li.setAttribute('id', newId); //used to create nodes for focus_helper
   li.setAttribute('tabindex', '-1');
+  observer.observe(li); //used for lazy loading all classes 'lazy-load'
 
   const divDescript = document.createElement('div');//To allow proper tabbing, otherwise list gets stuck
   divDescript.setAttribute('aria-label', `${restaurant.name} restaurant. Please Use Arrow Keys to View Items.`);
@@ -231,7 +232,7 @@ createRestaurantHTML = (restaurant) => {
   li.append(divDescript);
 
   const image = document.createElement('img');
-  image.className = 'focus-item restaurant-img';
+  image.className = 'focus-item restaurant-img lazy-load';
   image.setAttribute('alt', restaurant.alt);
   image.setAttribute('srcset', DBHelper.imageSrcsetForRestaurant(restaurant));
   image.setAttribute('sizes', DBHelper.imageSizesForRestaurant(restaurant));
@@ -240,25 +241,26 @@ createRestaurantHTML = (restaurant) => {
 
   const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
-  name.className = 'focus-item';
+  name.className = 'focus-item lazy-load';
+  name.style.display = 'none';
   li.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
-  neighborhood.className = 'focus-item';
+  neighborhood.className = 'focus-item lazy-load';
   li.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
-  address.className = 'focus-item';
+  address.className = 'focus-item  lazy-load';
   li.append(address);
 
   const more = document.createElement('a');
   more.setAttribute('aria-label', `View details and reviews of restaurant ${restaurant.name}`);
   more.innerHTML = 'View Details';
-  more.className = 'focus-item';
+  more.className = 'focus-item lazy-load';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  li.append(more);
 
   return li
 }

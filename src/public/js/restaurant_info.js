@@ -112,17 +112,18 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   divDescript.setAttribute('aria-label', `${restaurant.name} details section. Please Use Arrow Keys to View Items.`);
   divDescript.className = 'list-item-describor focus-item';
   restaurantContainer.prepend(divDescript);
+  observer.observe(restaurantContainer); //used for lazy loading all classes 'lazy-load'
 
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
-  name.className = 'focus-item';
+  name.className = 'focus-item lazy-load';
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
-  address.className = 'focus-item';
+  address.className = 'focus-item lazy-load';
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'focus-item restaurant-img';
+  image.className = 'focus-item restaurant-img lazy-load';
   image.setAttribute('alt', restaurant.alt);
   image.setAttribute('srcset', DBHelper.imageSrcsetForRestaurant(restaurant));
   image.setAttribute('sizes', DBHelper.imageSizesForRestaurant(restaurant));
@@ -130,7 +131,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
-  cuisine.className = 'focus-item';
+  cuisine.className = 'focus-item lazy-load';
 
   // fill operating hours
   if (restaurant.operating_hours) {
@@ -145,8 +146,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
+  observer.observe(hours); //used for lazy loading all classes 'lazy-load'
   for (let key in operatingHours) {
     const row = document.createElement('tr');
+    row.className = 'lazy-load';
 
     const day = document.createElement('td');
     day.innerHTML = key;
@@ -171,16 +174,17 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   divDescript.setAttribute('aria-label', `Review Information. Please tab over and use arrow keys to cycle through content`);
   divDescript.className = 'list-item-describor focus-item';
   container.prepend(divDescript);
+  observer.observe(container); //used for lazy loading all classes 'lazy-load'
 
   const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
-  title.className = 'focus-item';
+  title.className = 'focus-item lazy-load';
   container.appendChild(title);
 
   if (!reviews) {
     const noReviews = document.createElement('p');
     noReviews.innerHTML = 'No reviews yet!';
-    noReviews.className = 'focus-item';
+    noReviews.className = 'focus-item lazy-load';
     container.appendChild(noReviews);
     return;
   }
@@ -198,22 +202,23 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
   const name = document.createElement('p');
   name.innerHTML = review.name;
-  name.className = 'focus-item';
+  name.className = 'focus-item lazy-load';
   li.appendChild(name);
+  observer.observe(li); //used for lazy loading all classes 'lazy-load'
 
   const date = document.createElement('p');
   date.innerHTML = review.date;
-  date.className = 'focus-item';
+  date.className = 'focus-item lazy-load';
   li.appendChild(date);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
-  rating.className = 'focus-item';
+  rating.className = 'focus-item lazy-load';
   li.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
-  comments.className = 'focus-item';
+  comments.className = 'focus-item lazy-load';
   li.appendChild(comments);
 
   return li;
