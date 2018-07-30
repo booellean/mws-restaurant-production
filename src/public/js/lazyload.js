@@ -19,10 +19,8 @@ function loadItem(el){
   let childs = el.children;
   let childrenEls = Array.from(childs);
 
-  console.log(childrenEls);
   childrenEls.forEach( child => {
-    child.style.display = 'block';
-    console.log('the image was loaded');
+    child.classList.remove('lazy-load');
   })
 }
 
