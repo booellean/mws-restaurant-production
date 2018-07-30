@@ -122,9 +122,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'focus-item restaurant-img lazy-load';
   image.setAttribute('alt', restaurant.alt);
-  image.setAttribute('srcset', DBHelper.imageSrcsetForRestaurant(restaurant));
-  image.setAttribute('sizes', DBHelper.imageSizesForRestaurant(restaurant));
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.setAttribute('id', restaurant.id); //reset the id for the lazyLoad function in lazyload.js
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;

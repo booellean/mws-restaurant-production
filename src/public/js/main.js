@@ -233,16 +233,13 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'focus-item restaurant-img lazy-load';
+  image.setAttribute('id', restaurant.id);
   image.setAttribute('alt', restaurant.alt);
-  image.setAttribute('srcset', DBHelper.imageSrcsetForRestaurant(restaurant));
-  image.setAttribute('sizes', DBHelper.imageSizesForRestaurant(restaurant));
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
   li.append(image);
 
   const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   name.className = 'focus-item lazy-load';
-  name.style.display = 'none';
   li.append(name);
 
   const neighborhood = document.createElement('p');
