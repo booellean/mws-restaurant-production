@@ -11,14 +11,13 @@ var newMap;
  * Fetch neighborhoods and cuisines as soon as database is created
  */
 function initPage() {
-  initMap();
+  fetchRestaurantFromURL();
 }
 
 /**
  * Initialize leaflet map
  */
-initMap = () => {
-  fetchRestaurantFromURL((error, restaurant) => {
+initMap = (error, restaurant) => {
     if (error) { // Got an error!
       console.error(error);
     } else {
@@ -49,8 +48,7 @@ initMap = () => {
       mapBox.prepend(skiplink);
 
     }
-  });
-}
+  };
 
 /**
  * Get current restaurant from page URL.
@@ -65,8 +63,7 @@ fetchRestaurantFromURL = (callback) => {
     error = 'No restaurant id in URL'
     callback(error, null);
   } else {
-    //TODO: More efficient and eloquent solution to passing parameters?)
-  DBHelper.fetchRestaurantById(id);
+    DBHelper.fetchRestaurantById(id);
   }
 }
 
@@ -77,7 +74,7 @@ fillFetchedRestaurantFromURL = (error, restaurant) => {
     return;
   }
   fillRestaurantHTML();
-  return (null, restaurant)
+  initMap(null, restaurant);
 }
 
 //Original Function
