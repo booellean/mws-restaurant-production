@@ -1,0 +1,25 @@
+/* ============== Media Queries for Map and Restaurant ============= */
+@media screen and (max-width: 615px){
+  /*restaurant.html page*/
+  #restaurant-container {
+    #restaurant-img{
+      width: 100%;
+      float: none;
+    }
+  }
+  #reviews-container{
+    #reviews-list {
+      li{
+        width: 100%;
+      }
+    }
+  }
+  /*index.html page*/
+  #restaurant-content{
+    #restaurants-list{
+      li{
+        width: 100%;
+      }
+    }
+  }
+}
